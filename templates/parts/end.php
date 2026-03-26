@@ -17,6 +17,7 @@
     <div class="copyright">
         <p style="color: #ffffff;">©<?= date("Y") ?> Trip’Horizon par Fablec Maëlle, Bruche Julie et <a href="https://fulldevspirit.fr">Marmaroli Eléa</a></p>
     </div>
+    <p style="color: #ffffff;">Ce site est un site fictif à but pédagogique</p>
 </footer>
 <script>
   window.addEventListener("load", () => {
