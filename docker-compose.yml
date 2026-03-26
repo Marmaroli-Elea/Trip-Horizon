@@ -1,0 +1,52 @@
+networks:
+  mysql-php:
+    driver: bridge
+
+volumes:
+  mysqldata_partiels2:
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_partiels2
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: CoursBDD
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - "3307:3307"
+    volumes:
+      - mysqldata_partiels2:/var/lib/mysql
+    networks:
+      mysql-php:
+        aliases:
+          - mysql
+  php:
+    build:
+      context: .
+    container_name: php_partiels2
+    links:
+      - mysql
+    ports:
+      - 80:80
+    volumes:
+      - ".:/srv"
+    networks:
+      mysql-php:
+        aliases:
+          - php
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_partiels2
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - 8082:80
+    networks:
+      mysql-php:
+        aliases:
+          - phpmyadmin
